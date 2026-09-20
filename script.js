@@ -50,20 +50,35 @@ const data = {
 const spokes = document.querySelectorAll('.spoke-node');
 const displayPanel = document.getElementById('display-panel');
 
+function activateNode(node) {
+    const targetKey = node.getAttribute('data-target');
+    const targetData = data[targetKey];
+    
+    if (!targetData) return;
+
+    spokes.forEach(s => s.style.borderColor = 'var(--cyan-primary)');
+    node.style.borderColor = 'var(--gold-primary)';
+
+    displayPanel.classList.add('active');
+    displayPanel.innerHTML = `
+        <h3 class="info-title">${targetData.title}</h3>
+        <div class="info-content">${targetData.html}</div>
+    `;
+}
+
 spokes.forEach(spoke => {
+    // Desktop mouse hover
     spoke.addEventListener('mouseenter', function() {
-        const targetKey = this.getAttribute('data-target');
-        const targetData = data[targetKey];
-        
-        displayPanel.classList.add('active');
-        displayPanel.innerHTML = `
-            <h3 class="info-title">${targetData.title}</h3>
-            <div class="info-content">${targetData.html}</div>
-        `;
+        activateNode(this);
+    });
+
+    // Mobile tap / click
+    spoke.addEventListener('click', function(e) {
+        e.stopPropagation();
+        activateNode(this);
     });
 });
 
-// Intersection Observer for Scroll Animations & Progress Bars
 const observerOptions = {
     root: null,
     rootMargin: '0px',
@@ -76,7 +91,6 @@ const observer = new IntersectionObserver((entries, observer) => {
             // Fade in the section
             entry.target.classList.add('visible');
             
-            // If the section has progress bars, trigger their custom animations
             const progressBoxes = entry.target.querySelectorAll('.progress-box');
             
             progressBoxes.forEach(box => {
@@ -84,18 +98,14 @@ const observer = new IntersectionObserver((entries, observer) => {
                 const percentText = box.querySelector('.skill-percent');
                 const targetWidth = parseInt(bar.getAttribute('data-width'));
                 
-                // Prevent re-animating if it has already been animated
                 if (bar.style.width === targetWidth + '%') return;
 
-                // 1. Expand the bar
                 bar.style.width = targetWidth + '%';
-                // Make the number visible
                 percentText.style.opacity = '1';
 
-                // 2. Animate the number counting up
                 let currentNum = 0;
-                const duration = 1500; // 1.5 seconds (Matches CSS transition)
-                const intervalTime = 20; // Update every 20ms
+                const duration = 1500; 
+                const intervalTime = 20; 
                 const steps = duration / intervalTime;
                 const increment = targetWidth / steps;
 
@@ -103,7 +113,7 @@ const observer = new IntersectionObserver((entries, observer) => {
                     currentNum += increment;
                     
                     if (currentNum >= targetWidth) {
-                        currentNum = targetWidth; // Cap it exactly at target
+                        currentNum = targetWidth; 
                         clearInterval(counter);
                     }
                     
@@ -118,16 +128,13 @@ document.querySelectorAll('.fade-in').forEach((el) => {
     observer.observe(el);
 });
 
-// --- Cipher Text Animation ---
 function animateCipher() {
     const title = document.getElementById('main-title');
     const targetText = "The Rachyeta";
     
-    // Arrays to hold current moving letters and the final target letters
     let currents = [];
     let targets = [];
 
-    // Setup: Convert targets to character codes and set starting points
     for (let i = 0; i < targetText.length; i++) {
         const charCode = targetText.charCodeAt(i);
         targets.push(charCode);
@@ -141,36 +148,29 @@ function animateCipher() {
         }
     }
 
-    // Run the interval every 30 milliseconds
     const interval = setInterval(() => {
         let finished = true;
         let displayString = "";
 
-        // Build the current string for this frame
         for (let i = 0; i < targets.length; i++) {
             displayString += String.fromCharCode(currents[i]);
 
-            // If the current letter hasn't reached the target letter yet, increment it
             if (currents[i] < targets[i]) {
                 currents[i]++; // Move to the next letter in the alphabet
                 finished = false; // The animation isn't done yet
             }
         }
 
-        // Apply the text to the screen
         title.innerText = displayString;
         
-        // Apply the text to the data-text attribute so the CSS glow matches
         title.setAttribute('data-text', displayString);
 
-        // Clear the timer when every letter has hit its target
         if (finished) {
             clearInterval(interval);
         }
-    }, 30); // 30ms * 17 steps (A to R) = ~510ms (0.5 seconds)
+    }, 30); 
 }
 
-// Trigger the animation shortly after the page loads
 window.onload = () => {
-    setTimeout(animateCipher, 200); // 200ms delay so the user doesn't miss the start
+    setTimeout(animateCipher, 200); 
 };
