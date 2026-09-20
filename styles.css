@@ -1,4 +1,3 @@
-/* --- Divine-Tech Theme Variables --- */
 :root {
     --bg-deep: #030613;
     --bg-mid: #0a1128;
@@ -24,7 +23,6 @@ body {
     scroll-behavior: smooth;
 }
 
-/* --- Cosmic Background Effect --- */
 .stars {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -36,7 +34,6 @@ body {
     overflow: hidden;
 }
 
-/* --- Faint Orbiting Planets --- */
 .orbit {
     position: absolute;
     top: 50%;
@@ -73,7 +70,6 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg-deep); }
 ::-webkit-scrollbar-thumb { background: var(--gold-primary); border-radius: 4px; }
 
-/* --- Scroll Animation Classes --- */
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
@@ -84,7 +80,6 @@ body {
     transform: translateY(0);
 }
 
-/* --- Sections Setup --- */
 section {
     min-height: 100vh;
     display: flex;
@@ -114,7 +109,7 @@ section {
     60% { transform: translateY(-7px); }
 }
 
-/* --- Section 1: Hero --- */
+
 #hero h1 {
     font-size: 6rem;
     color: transparent;
@@ -133,7 +128,7 @@ section {
     filter: blur(15px);
 }
 
-/* --- Section 2: About --- */
+
 .about-container {
     display: flex;
     align-items: center;
@@ -188,7 +183,7 @@ section {
     text-align: justify;
 }
 
-/* --- Section 3: Chakravyu Wheel --- */
+
 #wheel-section {
     display: flex;
     flex-direction: row;
@@ -208,7 +203,6 @@ section {
     align-items: center;
 }
 
-/* --- Circulating Geometric Mandala --- */
 .mandala-base {
     position: absolute; width: 100%; height: 100%; border-radius: 50%;
     border: 1px solid rgba(207, 181, 59, 0.2);
@@ -352,7 +346,6 @@ section {
     text-align: center;
 }
 
-/* Specific icon colors if they don't have Devicon colored versions */
 .custom-cyan { color: var(--cyan-primary); }
 .custom-gold { color: var(--gold-primary); }
 
@@ -408,14 +401,12 @@ section {
     letter-spacing: 1px;
 }
 
-/* --- Section 4: Path of Mastery (Progress) --- */
 #progress {
     width: 100%;
     max-width: 1100px;
     margin: 0 auto;
 }
 
-/* Identical styling to the Rachyeta Hero heading */
 .divine-heading {
     font-size: 4rem;
     color: transparent;
@@ -446,7 +437,6 @@ section {
     width: 100%;
 }
 
-/* Individual boxed layout for each skill */
 .progress-box {
     background: rgba(10, 17, 40, 0.8);
     border: 1px solid var(--gold-primary);
@@ -459,7 +449,6 @@ section {
     position: relative;
 }
 
-/* Corner accents for the individual boxes */
 .progress-box::before, .progress-box::after {
     content: ''; position: absolute; width: 20px; height: 20px; border: 2px solid var(--cyan-primary);
 }
@@ -480,7 +469,7 @@ section {
     height: 12px;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 6px;
-    overflow: visible; /* Must be visible so the hovering number isn't cut off */
+    overflow: visible; 
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -489,16 +478,14 @@ section {
     width: 0%; /* Starts at 0 */
     border-radius: 6px;
     position: relative;
-    /* CSS transition handles the smooth bar growth */
     transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* The number physically attaches to the right edge of the filling bar */
 .skill-percent {
     position: absolute;
-    top: 25px; /* Moved from -30px to 25px so it hangs below the bar */
+    top: 25px; 
     right: 0;
-    transform: translateX(50%); /* Centers the number perfectly over the tip of the bar */
+    transform: translateX(50%); 
     font-size: 1.2rem;
     color: var(--text-main);
     font-family: var(--ancient-script);
@@ -511,3 +498,109 @@ section {
 .progress-fill.cyan-glow { background: var(--cyan-primary); box-shadow: 0 0 15px var(--cyan-primary); }
 .progress-fill.gold-glow { background: var(--gold-primary); box-shadow: 0 0 15px var(--gold-primary); }
 .progress-fill.gold-glow .skill-percent { text-shadow: 0 0 10px var(--gold-glow); }
+
+
+
+@media screen and (max-width: 992px) {
+    section {
+        padding: 4rem 1.5rem;
+        min-height: auto;
+    }
+
+    #hero {
+        min-height: 100vh;
+    }
+
+    #hero h1 {
+        font-size: clamp(2.4rem, 8.5vw, 4rem);
+        letter-spacing: clamp(3px, 1.5vw, 6px);
+        text-align: center;
+        max-width: 95vw;
+        word-break: break-word;
+    }
+
+    .about-container {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem 1.5rem;
+        text-align: center;
+    }
+
+    .profile-img {
+        width: 180px;
+        height: 180px;
+    }
+
+    .about-text h2 {
+        font-size: 2.2rem;
+    }
+
+    .about-text p {
+        text-align: left;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    #wheel-section {
+        flex-direction: column;
+        gap: 2.5rem;
+        width: 100%;
+    }
+
+    .chakravyu-wrapper {
+        width: 320px;
+        height: 320px;
+        margin: 0 auto;
+    }
+
+    .wheel-center {
+        font-size: 1.2rem;
+        padding: 12px;
+        letter-spacing: 1px;
+    }
+
+    .spoke-node {
+        width: 65px;
+        height: 65px;
+    }
+
+    .spoke-text {
+        font-size: 0.65rem;
+        letter-spacing: 0px;
+    }
+
+    .node-1 { top: -15px; left: 50%; margin-left: -32px; }
+    .node-2 { top: 35%; right: -15px; margin-top: -32px; }
+    .node-3 { bottom: 10px; right: 10%; }
+    .node-4 { bottom: 10px; left: 10%; }
+    .node-5 { top: 35%; left: -15px; margin-top: -32px; }
+
+    .info-panel {
+        width: 100%;
+        max-width: 480px;
+        min-height: auto;
+        padding: 1.5rem;
+        margin: 0 auto;
+    }
+
+    .default-msg {
+        margin-top: 2rem;
+        transform: none;
+        font-size: 1rem;
+    }
+
+    .divine-heading {
+        font-size: clamp(2rem, 7vw, 3rem);
+        letter-spacing: 4px;
+        margin-bottom: 2.5rem;
+    }
+
+    .progress-container {
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+    }
+
+    .progress-box {
+        padding: 1.5rem;
+    }
+}
